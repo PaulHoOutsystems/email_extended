@@ -10,7 +10,7 @@ namespace psn.PH
     public interface IEmailExtended_Ext
     {
         /// <summary>
-        /// Validates an email address. True if valid, False otherwise.
+        /// Validates an email address (RFC 6530). True if valid, False otherwise.
         /// </summary>
         [OSAction(Description = "Validates an email address.", ReturnName = "isValid")]
         public bool isValidateEmailAddress_Ext(string address);

@@ -16,7 +16,7 @@ namespace psn.PH
     {
         // Adapted from https://learn.microsoft.com/en-us/dotnet/standard/base-types/how-to-verify-that-strings-are-in-valid-email-format
         /// <summary>
-        /// Validate whether an email address is of valid format (RFC 3696 or Section 3.4 of RFC 5322)
+        /// Validate whether an email address is of valid format (RFC 6530)
         /// </summary>
         /// <param name="email">The email address to be validated.</param>
         /// <returns>returns true if the email address is of valid format else false</returns>

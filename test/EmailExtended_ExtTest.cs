@@ -71,4 +71,12 @@ public class EmailExtended_ExtTests
         string test_address = "mysite..1234@yahoo.com";
         Assert.False(ee.isValidateEmailAddress_Ext(test_address));
     }
+
+    [Fact]
+    public void isValidateEmailAddress_Ext_test8()
+    {
+        var ee = new EmailExtended_Ext();
+        string test_address = "João@outsystems.com";
+        Assert.True(ee.isValidateEmailAddress_Ext(test_address));
+    }
 }
