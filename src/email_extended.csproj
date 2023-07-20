@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="resources\EmailExtIcon.png">
+			<LogicalName>psn.PH.EmailExtIcon.png</LogicalName>
+		</EmbeddedResource>
+		<Content Include="resources\*.*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="OutSystems.ExternalLibraries.SDK" Version="*"/>
+	</ItemGroup>
+</Project>
