@@ -19,6 +19,7 @@ namespace psn.PH
         /// </summary>
         [OSAction(Description = "Send an email message through a SMTP server.", ReturnName = "hasSent")]
         public bool sendEmail_Ext(string server, int port, string username, string pass, string from, string[] to, string[] cc, string[] bcc, string subject, bool isHtml, string content);
-
+        [OSAction(Description = "Get unique build information for this custom library.", ReturnName = "buildInfo")]
+        public string getBuildInfo_Ext();
     }
 }

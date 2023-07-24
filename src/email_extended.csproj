@@ -3,6 +3,7 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<Deterministic>false</Deterministic>
 	</PropertyGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="resources\EmailExtIcon.png">

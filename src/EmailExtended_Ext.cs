@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Net;
 using System.Net.Mail;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace psn.PH
@@ -136,6 +137,25 @@ namespace psn.PH
             }
 
             return true;
+        }
+
+        public string getBuildInfo_Ext()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var filePath = assembly.Location;
+            const int peHeaderOffset = 60;
+            const int linkerTimestampOffset = 8;
+            var bytes = new byte[2048];
+
+            using (var file = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                file.Read(bytes, 0, bytes.Length);
+            }
+
+            var headerPos = BitConverter.ToInt32(bytes, peHeaderOffset);
+            var secondsSince1970 = BitConverter.ToInt32(bytes, headerPos + linkerTimestampOffset);
+            var dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            return dt.AddSeconds(secondsSince1970).ToLocalTime().ToString("yyyyMMddHHmmss");
         }
     }
 }

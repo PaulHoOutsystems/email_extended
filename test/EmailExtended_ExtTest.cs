@@ -1,4 +1,5 @@
 using Xunit;
+using netDumbster.smtp;
 namespace psn.PH;
 
 public class EmailExtended_ExtTests
@@ -78,5 +79,28 @@ public class EmailExtended_ExtTests
         var ee = new EmailExtended_Ext();
         string test_address = "João@outsystems.com";
         Assert.True(ee.isValidateEmailAddress_Ext(test_address));
+    }
+
+    public void sendEmail_Ext_test1()
+    {
+        var server = SimpleSmtpServer.Start(1234);
+        var ee = new EmailExtended_Ext();
+        string[] to = new string[1] { "João@outsystems.com" };
+        string[] cc = new string[] { };
+        string[] bcc = new string[] { };
+        string subject = "Test mail";
+        bool isHtml = true;
+        string content = "<html><body>Hello World!</body></html>";
+        var status = ee.sendEmail_Ext("127.0.0.1", 1234, "nobody", "badpassword", "nobody@nowhere.com", to, cc, bcc, subject, isHtml, content);
+        var count = server.ReceivedEmailCount;
+        Assert.False(count == 0);
+    }
+
+    [Fact]
+    public void getBuildInfo_test1()
+    {
+        var ee = new EmailExtended_Ext();
+        var buildInfo = ee.getBuildInfo_Ext();
+        Assert.True(buildInfo.Length == 14);
     }
 }
