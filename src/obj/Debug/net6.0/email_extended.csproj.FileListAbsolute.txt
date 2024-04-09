@@ -1,0 +1,13 @@
+C:\Users\pua\Documents\GitHub\email_extended\src\bin\Debug\net6.0\resources\EmailExtIcon.png
+C:\Users\pua\Documents\GitHub\email_extended\src\bin\Debug\net6.0\email_extended.deps.json
+C:\Users\pua\Documents\GitHub\email_extended\src\bin\Debug\net6.0\email_extended.dll
+C:\Users\pua\Documents\GitHub\email_extended\src\bin\Debug\net6.0\email_extended.pdb
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Debug\net6.0\email_extended.csproj.AssemblyReference.cache
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Debug\net6.0\email_extended.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Debug\net6.0\email_extended.AssemblyInfoInputs.cache
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Debug\net6.0\email_extended.AssemblyInfo.cs
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Debug\net6.0\email_extended.csproj.CoreCompileInputs.cache
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Debug\net6.0\email_extended.dll
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Debug\net6.0\refint\email_extended.dll
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Debug\net6.0\email_extended.pdb
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Debug\net6.0\ref\email_extended.dll

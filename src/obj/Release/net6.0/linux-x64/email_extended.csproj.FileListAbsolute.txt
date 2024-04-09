@@ -1,0 +1,13 @@
+C:\Users\pua\Documents\GitHub\email_extended\src\bin\Release\net6.0\linux-x64\resources\EmailExtIcon.png
+C:\Users\pua\Documents\GitHub\email_extended\src\bin\Release\net6.0\linux-x64\email_extended.deps.json
+C:\Users\pua\Documents\GitHub\email_extended\src\bin\Release\net6.0\linux-x64\email_extended.dll
+C:\Users\pua\Documents\GitHub\email_extended\src\bin\Release\net6.0\linux-x64\email_extended.pdb
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Release\net6.0\linux-x64\email_extended.csproj.AssemblyReference.cache
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Release\net6.0\linux-x64\email_extended.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Release\net6.0\linux-x64\email_extended.AssemblyInfoInputs.cache
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Release\net6.0\linux-x64\email_extended.AssemblyInfo.cs
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Release\net6.0\linux-x64\email_extended.csproj.CoreCompileInputs.cache
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Release\net6.0\linux-x64\email_extended.dll
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Release\net6.0\linux-x64\refint\email_extended.dll
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Release\net6.0\linux-x64\email_extended.pdb
+C:\Users\pua\Documents\GitHub\email_extended\src\obj\Release\net6.0\linux-x64\ref\email_extended.dll

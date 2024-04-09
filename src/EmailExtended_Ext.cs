@@ -11,6 +11,10 @@ namespace psn.PH
     /// the actual functionality of 
     /// (1) validation of email address
     /// (2) sending of message content to a SMTP server. The message content can be plain text or in HTML format.  
+    /// 
+    /// To run this test, you should have a smtp server. 
+    /// You can use something like https://github.com/rnwood/smtp4dev/wiki/Installation
+    /// The settings that is used is found in configuration/appsettings.json
     /// </summary>
 
     public class EmailExtended_Ext : IEmailExtended_Ext
@@ -70,6 +74,27 @@ namespace psn.PH
         }
 
         /// <summary>
+        /// Sends an email with server certificate validation
+        /// </summary>
+        /// <param name="server">The SMTP hostname</param>
+        /// <param name="port">The SMTP port number</param>
+        /// <param name="username">The username used for SMTP server authentication</param>
+        /// <param name="pass">The password used for SMTP server authentication</param>
+        /// <param name="from">The sender email address. NOTE: Some SMTP servers do not allow "from" different from "username"</param>
+        /// <param name="to">List of email address of (To) receipients</param>
+        /// <param name="cc">List of email address of (Cc) receipients</param>
+        /// <param name="bcc">List of email address of (Bcc) receipients</param>
+        /// <param name="subject">Subject title of the email</param>
+        /// <param name="isHtml">true if the content is a HTML based document, false otherwise</param>
+        /// <param name="content">Content of the email message</param>
+        /// <param name="ignoreServerCertificateValidation">If true, will not perform SMTP server certificate validation. Default false</param>
+        /// <returns>returns true if the email is sent</returns>
+        public bool sendEmail_Ext(string server, int port, string username, string pass, string from, string[] to, string[] cc, string[] bcc, string subject, bool isHtml, string content)
+        {
+            return this.sendEmail_Ext(server, port, username, pass, from, to, cc, bcc, subject, isHtml, content, true);
+        }
+
+        /// <summary>
         /// Sends an email 
         /// </summary>
         /// <param name="server">The SMTP hostname</param>
@@ -83,8 +108,9 @@ namespace psn.PH
         /// <param name="subject">Subject title of the email</param>
         /// <param name="isHtml">true if the content is a HTML based document, false otherwise</param>
         /// <param name="content">Content of the email message</param>
+        /// <param name="ignoreServerCertificateValidation">If true, will not perform SMTP server certificate validation. Default false</param>
         /// <returns>returns true if the email is sent</returns>
-        public bool sendEmail_Ext(string server, int port, string username, string pass, string from, string[] to, string[] cc, string[] bcc, string subject, bool isHtml, string content)
+        public bool sendEmail_Ext(string server, int port, string username, string pass, string from, string[] to, string[] cc, string[] bcc, string subject, bool isHtml, string content, bool ignoreServerCertificateValidation)
         {
             MailAddress[] ma_to_array = new MailAddress[to.Length];
             for (int i = 0; i < to.Length; i++)
@@ -95,7 +121,23 @@ namespace psn.PH
                 }
                 ma_to_array[i] = new MailAddress(to[i]);
             }
-            MailAddress ma_from = new MailAddress(from);
+            MailAddress ma_from;
+            if (isValidateEmailAddress_Ext(username) && (from.Trim().Length == 0 || !isValidateEmailAddress_Ext(from)))
+            {
+                ma_from = new MailAddress(username);
+            }
+            else
+            {
+                if (isValidateEmailAddress_Ext(from))
+                {
+                    ma_from = new MailAddress(from);
+                }
+                else
+                {
+                    return false; // the username is not a valid email address and the from address is invalid too
+                }
+            }
+
             MailMessage message = new MailMessage(ma_from, ma_to_array[0]);
             message.Subject = subject;
             message.Body = content;
@@ -129,11 +171,28 @@ namespace psn.PH
                     message.Bcc.Add(new MailAddress(bcc[i]));
                 }
             }
-            using (var smtp = new SmtpClient(server, port))
+            string hostName = server.Equals("secure-gateway") ? Environment.GetEnvironmentVariable("SECURE_GATEWAY") ?? "hostname-undefined" : server;
+            using (var smtp = new SmtpClient(hostName, port))
             {
+                var scvcb = ServicePointManager.ServerCertificateValidationCallback;
+                if (ignoreServerCertificateValidation)
+                {
+                    // ignore server certificate validation in case of self-signed certs
+                    ServicePointManager.ServerCertificateValidationCallback =
+                            (sender, certificate, chain, sslPolicyErrors) =>
+                            {
+                                return true;
+                            };
+
+                }
+
                 smtp.Credentials = new NetworkCredential(from, pass);
                 smtp.EnableSsl = true;
                 smtp.Send(message);
+                // restore ServicePointManager.ServerCertificateValidationCallback 
+                // if it was ignore for this particular request so that subsequent 
+                // calls will revert back to validation by default
+                ServicePointManager.ServerCertificateValidationCallback = scvcb;
             }
 
             return true;

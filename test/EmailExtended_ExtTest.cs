@@ -1,9 +1,17 @@
 using Xunit;
-using netDumbster.smtp;
+using Xunit.Abstractions;
+
 namespace psn.PH;
 
 public class EmailExtended_ExtTests
 {
+    private readonly ITestOutputHelper output;
+
+    public EmailExtended_ExtTests(ITestOutputHelper output)
+    {
+        this.output = output;
+    }
+
     /// <summary>
     /// Unit tests that are mostly inspired from https://www.w3resource.com/javascript/form/email-validation.php
     /// </summary>
@@ -81,19 +89,43 @@ public class EmailExtended_ExtTests
         Assert.True(ee.isValidateEmailAddress_Ext(test_address));
     }
 
+    [Fact]
+    /// <summary>
+    /// simulate the case of sending email with server validation turned off but
+    /// going on TLS. The smtp server will be on self signed certificate. 
+    /// </summary>
     public void sendEmail_Ext_test1()
     {
-        var server = SimpleSmtpServer.Start(1234);
         var ee = new EmailExtended_Ext();
-        string[] to = new string[1] { "João@outsystems.com" };
+        string[] to = new string[1] { "Joao@outsystems.com" };
         string[] cc = new string[] { };
         string[] bcc = new string[] { };
         string subject = "Test mail";
         bool isHtml = true;
-        string content = "<html><body>Hello World!</body></html>";
-        var status = ee.sendEmail_Ext("127.0.0.1", 1234, "nobody", "badpassword", "nobody@nowhere.com", to, cc, bcc, subject, isHtml, content);
-        var count = server.ReceivedEmailCount;
-        Assert.False(count == 0);
+        string content = "<html><body>Hello World 1!</body></html>";
+        // ignore server certification validation since it is self signed cert
+        // but going on TLS
+        var status = ee.sendEmail_Ext("127.0.0.1", 587, "nobody", "badpassword", "nobody@nowhere.com", to, cc, bcc, subject, isHtml, content, true);
+        Assert.True(status);
+    }
+
+    [Fact]
+    /// <summary>
+    /// simulate the case of sending email with server validation turned on 
+    /// however, for unit test, the smtp server is using self signed certificate 
+    /// and hence will fail in server certificate validation, throwing a authenticationexception
+    /// </summary>
+    public void sendEmail_Ext_test2()
+    {
+        var ee = new EmailExtended_Ext();
+        string[] to = new string[1] { "Joao@outsystems.com" };
+        string[] cc = new string[] { };
+        string[] bcc = new string[] { };
+        string subject = "Test mail";
+        bool isHtml = true;
+        string content = "<html><body>Hello World 2!</body></html>";
+
+        Assert.Throws<System.Security.Authentication.AuthenticationException>(() => ee.sendEmail_Ext("127.0.0.1", 587, "nobody", "badpassword", "nobody@nowhere.com", to, cc, bcc, subject, isHtml, content, false));
     }
 
     [Fact]
@@ -102,5 +134,6 @@ public class EmailExtended_ExtTests
         var ee = new EmailExtended_Ext();
         var buildInfo = ee.getBuildInfo_Ext();
         Assert.True(buildInfo.Length == 14);
+        output.WriteLine(buildInfo);
     }
 }

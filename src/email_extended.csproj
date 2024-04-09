@@ -4,6 +4,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Deterministic>false</Deterministic>
+		<ZipFileName>Email Extended (Black Belt Edition)</ZipFileName>
 	</PropertyGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="resources\EmailExtIcon.png">
@@ -16,4 +17,11 @@
 	<ItemGroup>
 		<PackageReference Include="OutSystems.ExternalLibraries.SDK" Version="*"/>
 	</ItemGroup>
+	<Target Name="packup" AfterTargets="Publish">
+		<Message Text="Packing for ODC upload..."/>
+		<ZipDirectory
+            SourceDirectory="bin\Release\net6.0\linux-x64\publish"
+            DestinationFile="$(ZipFileName).zip" 
+			Overwrite="true"/>
+	</Target>
 </Project>

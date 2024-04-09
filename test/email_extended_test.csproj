@@ -9,6 +9,5 @@
     <PackageReference Include="xunit" Version="*"/>
     <PackageReference Include="xunit.runner.visualstudio" Version="*"/>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="*"/>
-    <PackageReference Include="netDumbster" Version="*"/>
   </ItemGroup>
 </Project>
