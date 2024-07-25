@@ -90,6 +90,14 @@ public class EmailExtended_ExtTests
     }
 
     [Fact]
+    public void isValidateEmailAddress_Ext_test9()
+    {
+        var ee = new EmailExtended_Ext();
+        string test_address = "nobody@cornerstone.team";
+        Assert.False(ee.isValidateEmailAddress_Ext(test_address));
+    }
+
+    [Fact]
     /// <summary>
     /// simulate the case of sending email with server validation turned off but
     /// going on TLS. The smtp server will be on self signed certificate. 
@@ -105,7 +113,7 @@ public class EmailExtended_ExtTests
         string content = "<html><body>Hello World 1!</body></html>";
         // ignore server certification validation since it is self signed cert
         // but going on TLS
-        var status = ee.sendEmail_Ext("127.0.0.1", 587, "nobody", "badpassword", "nobody@nowhere.com", to, cc, bcc, subject, isHtml, content, true);
+        var status = ee.sendEmail_Ext("127.0.0.1", 587, "nobody", "badpassword", "nobody@nowhere.com", to, cc, bcc, subject, isHtml, content, true, false);
         Assert.True(status);
     }
 
@@ -125,7 +133,7 @@ public class EmailExtended_ExtTests
         bool isHtml = true;
         string content = "<html><body>Hello World 2!</body></html>";
 
-        Assert.Throws<System.Security.Authentication.AuthenticationException>(() => ee.sendEmail_Ext("127.0.0.1", 587, "nobody", "badpassword", "nobody@nowhere.com", to, cc, bcc, subject, isHtml, content, false));
+        Assert.Throws<System.Security.Authentication.AuthenticationException>(() => ee.sendEmail_Ext("127.0.0.1", 587, "nobody", "badpassword", "nobody@nowhere.com", to, cc, bcc, subject, isHtml, content, false, false));
     }
 
     [Fact]
