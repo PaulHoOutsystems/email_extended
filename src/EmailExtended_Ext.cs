@@ -19,6 +19,7 @@ namespace psn.PH
 
     public class EmailExtended_Ext : IEmailExtended_Ext
     {
+        private bool SMTP_IGNORE_EMAIL_ADDRESS_VALIDATION = false;
         // Adapted from https://learn.microsoft.com/en-us/dotnet/standard/base-types/how-to-verify-that-strings-are-in-valid-email-format
         /// <summary>
         /// Validate whether an email address is of valid format (RFC 6530)
@@ -27,6 +28,12 @@ namespace psn.PH
         /// <returns>returns true if the email address is of valid format else false</returns>
         public bool isValidateEmailAddress_Ext(string email)
         {
+            // switch to ignore email validation
+            if (SMTP_IGNORE_EMAIL_ADDRESS_VALIDATION)
+            {
+                return true;
+            }
+
             if (string.IsNullOrWhiteSpace(email))
                 return false;
 
@@ -91,7 +98,7 @@ namespace psn.PH
         /// <returns>returns true if the email is sent</returns>
         public bool sendEmail_Ext(string server, int port, string username, string pass, string from, string[] to, string[] cc, string[] bcc, string subject, bool isHtml, string content)
         {
-            return this.sendEmail_Ext(server, port, username, pass, from, to, cc, bcc, subject, isHtml, content, true);
+            return this.sendEmail_Ext(server, port, username, pass, from, to, cc, bcc, subject, isHtml, content, true, false);
         }
 
         /// <summary>
@@ -110,8 +117,9 @@ namespace psn.PH
         /// <param name="content">Content of the email message</param>
         /// <param name="ignoreServerCertificateValidation">If true, will not perform SMTP server certificate validation. Default false</param>
         /// <returns>returns true if the email is sent</returns>
-        public bool sendEmail_Ext(string server, int port, string username, string pass, string from, string[] to, string[] cc, string[] bcc, string subject, bool isHtml, string content, bool ignoreServerCertificateValidation)
+        public bool sendEmail_Ext(string server, int port, string username, string pass, string from, string[] to, string[] cc, string[] bcc, string subject, bool isHtml, string content, bool ignoreServerCertificateValidation, bool ignoreEmailAddressValidation)
         {
+            SMTP_IGNORE_EMAIL_ADDRESS_VALIDATION = ignoreEmailAddressValidation;
             MailAddress[] ma_to_array = new MailAddress[to.Length];
             for (int i = 0; i < to.Length; i++)
             {
