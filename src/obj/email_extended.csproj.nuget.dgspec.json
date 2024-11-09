@@ -1,32 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pua\\Documents\\GitHub\\email_extended\\src\\email_extended.csproj": {}
+    "C:\\Dev\\Git\\email_extended\\src\\email_extended.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pua\\Documents\\GitHub\\email_extended\\src\\email_extended.csproj": {
+    "C:\\Dev\\Git\\email_extended\\src\\email_extended.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pua\\Documents\\GitHub\\email_extended\\src\\email_extended.csproj",
+        "projectUniqueName": "C:\\Dev\\Git\\email_extended\\src\\email_extended.csproj",
         "projectName": "email_extended",
-        "projectPath": "C:\\Users\\pua\\Documents\\GitHub\\email_extended\\src\\email_extended.csproj",
-        "packagesPath": "C:\\Users\\pua\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pua\\Documents\\GitHub\\email_extended\\src\\obj\\",
+        "projectPath": "C:\\Dev\\Git\\email_extended\\src\\email_extended.csproj",
+        "packagesPath": "C:\\Users\\jnama\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\Git\\email_extended\\src\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pua\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jnama\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -34,11 +34,16 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "OutSystems.ExternalLibraries.SDK": {
               "target": "Package",
@@ -61,12 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
