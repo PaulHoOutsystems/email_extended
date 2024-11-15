@@ -108,12 +108,13 @@ public class EmailExtended_ExtTests
         string[] to = new string[1] { "Joao@outsystems.com" };
         string[] cc = new string[] { };
         string[] bcc = new string[] { };
+        string[] replyTo = new string[] { };
         string subject = "Test mail";
         bool isHtml = true;
         string content = "<html><body>Hello World 1!</body></html>";
         // ignore server certification validation since it is self signed cert
         // but going on TLS
-        var status = ee.sendEmail_Ext("127.0.0.1", 587, "nobody", "badpassword", "nobody@nowhere.com", to, cc, bcc, subject, isHtml, content, true, false);
+        var status = ee.sendEmail_Ext("127.0.0.1", 587, "nobody", "badpassword", "nobody@nowhere.com", to, cc, bcc, replyTo, subject, isHtml, content, true, false);
         Assert.True(status);
     }
 
@@ -129,11 +130,12 @@ public class EmailExtended_ExtTests
         string[] to = new string[1] { "Joao@outsystems.com" };
         string[] cc = new string[] { };
         string[] bcc = new string[] { };
+        string[] replyTo = new string[] { };
         string subject = "Test mail";
         bool isHtml = true;
         string content = "<html><body>Hello World 2!</body></html>";
 
-        Assert.Throws<System.Security.Authentication.AuthenticationException>(() => ee.sendEmail_Ext("127.0.0.1", 587, "nobody", "badpassword", "nobody@nowhere.com", to, cc, bcc, subject, isHtml, content, false, false));
+        Assert.Throws<System.Security.Authentication.AuthenticationException>(() => ee.sendEmail_Ext("127.0.0.1", 587, "nobody", "badpassword", "nobody@nowhere.com", to, cc, bcc, replyTo, subject, isHtml, content, false, false));
     }
 
     [Fact]

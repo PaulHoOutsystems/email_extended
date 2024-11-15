@@ -1,5 +1,0 @@
-C:\Users\pua\Documents\GitHub\email_extended\src\bin\Debug\net6.0\publish\resources\EmailExtIcon.png
-C:\Users\pua\Documents\GitHub\email_extended\src\bin\Debug\net6.0\publish\email_extended.dll
-C:\Users\pua\Documents\GitHub\email_extended\src\bin\Debug\net6.0\publish\email_extended.deps.json
-C:\Users\pua\Documents\GitHub\email_extended\src\bin\Debug\net6.0\publish\email_extended.pdb
-C:\Users\pua\Documents\GitHub\email_extended\src\bin\Debug\net6.0\publish\OutSystems.ExternalLibraries.SDK.dll
