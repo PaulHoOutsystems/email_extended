@@ -180,15 +180,14 @@ namespace psn.PH
                     message.Bcc.Add(new MailAddress(bcc[i]));
                 }
             }
-            if (bcc.Length > 0)
+            if (replyTo.Length > 0)
             {
-                for (int i = 0; i < bcc.Length; i++)
+                for (int i = 0; i < replyTo.Length; i++)
                 {
-                    if (!isValidateEmailAddress_Ext(bcc[i]))
+                    if (isValidateEmailAddress_Ext(replyTo[i]))
                     {
-                        return false;
+                        message.ReplyToList.Add(new MailAddress(replyTo[i]));
                     }
-                    message.Bcc.Add(new MailAddress(bcc[i]));
                 }
             }
             string hostName = server.Equals("secure-gateway") ? Environment.GetEnvironmentVariable("SECURE_GATEWAY") ?? "hostname-undefined" : server;
