@@ -96,9 +96,9 @@ namespace psn.PH
         /// <param name="content">Content of the email message</param>
         /// <param name="ignoreServerCertificateValidation">If true, will not perform SMTP server certificate validation. Default false</param>
         /// <returns>returns true if the email is sent</returns>
-        public bool sendEmail_Ext(string server, int port, string username, string pass, string from, string[] to, string[] cc, string[] bcc, string subject, bool isHtml, string content)
+        public bool sendEmail_Ext(string server, int port, string username, string pass, string from, string[] to, string[] cc, string[] bcc, string[] replyTo, string subject, bool isHtml, string content)
         {
-            return this.sendEmail_Ext(server, port, username, pass, from, to, cc, bcc, subject, isHtml, content, true, false);
+            return this.sendEmail_Ext(server, port, username, pass, from, to, cc, bcc, replyTo, subject, isHtml, content, true, false);
         }
 
         /// <summary>
@@ -112,12 +112,13 @@ namespace psn.PH
         /// <param name="to">List of email address of (To) receipients</param>
         /// <param name="cc">List of email address of (Cc) receipients</param>
         /// <param name="bcc">List of email address of (Bcc) receipients</param>
+        /// <param name="replyTo">List of email address of (ReplyTo) receipients</param>
         /// <param name="subject">Subject title of the email</param>
         /// <param name="isHtml">true if the content is a HTML based document, false otherwise</param>
         /// <param name="content">Content of the email message</param>
         /// <param name="ignoreServerCertificateValidation">If true, will not perform SMTP server certificate validation. Default false</param>
         /// <returns>returns true if the email is sent</returns>
-        public bool sendEmail_Ext(string server, int port, string username, string pass, string from, string[] to, string[] cc, string[] bcc, string subject, bool isHtml, string content, bool ignoreServerCertificateValidation, bool ignoreEmailAddressValidation)
+        public bool sendEmail_Ext(string server, int port, string username, string pass, string from, string[] to, string[] cc, string[] bcc, string[] replyTo, string subject, bool isHtml, string content, bool ignoreServerCertificateValidation, bool ignoreEmailAddressValidation)
         {
             SMTP_IGNORE_EMAIL_ADDRESS_VALIDATION = ignoreEmailAddressValidation;
             MailAddress[] ma_to_array = new MailAddress[to.Length];
@@ -166,6 +167,17 @@ namespace psn.PH
                         return false;
                     }
                     message.CC.Add(new MailAddress(cc[i]));
+                }
+            }
+            if (bcc.Length > 0)
+            {
+                for (int i = 0; i < bcc.Length; i++)
+                {
+                    if (!isValidateEmailAddress_Ext(bcc[i]))
+                    {
+                        return false;
+                    }
+                    message.Bcc.Add(new MailAddress(bcc[i]));
                 }
             }
             if (bcc.Length > 0)

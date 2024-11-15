@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Deterministic>false</Deterministic>
@@ -16,11 +16,14 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="OutSystems.ExternalLibraries.SDK" Version="*"/>
+		<!-- ONLY WHEN ODC USES .NET 9
+		<PackageReference Include="Exchange.WebServices.NETCore" Version="2.3.0" />
+		-->
 	</ItemGroup>
 	<Target Name="packup" AfterTargets="Publish">
 		<Message Text="Packing for ODC upload..."/>
 		<ZipDirectory
-            SourceDirectory="bin\Release\net6.0\linux-x64\publish"
+            SourceDirectory="bin\Release\net8.0\linux-x64\publish"
             DestinationFile="$(ZipFileName).zip" 
 			Overwrite="true"/>
 	</Target>
