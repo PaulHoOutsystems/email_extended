@@ -205,7 +205,7 @@ namespace psn.PH
 
                 }
 
-                smtp.Credentials = new NetworkCredential(from, pass);
+                smtp.Credentials = new NetworkCredential(username, pass);
                 smtp.EnableSsl = true;
                 smtp.Send(message);
                 // restore ServicePointManager.ServerCertificateValidationCallback 
